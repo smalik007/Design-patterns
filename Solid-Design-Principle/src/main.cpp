@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 
+#include "InterfaceSegregation.hpp"
 #include "LiskovSubstitutionPrinciple.hpp"
 #include "OpenClosedPrinciple.hpp"
 #include "SingleResponsePrinciple.hpp"
