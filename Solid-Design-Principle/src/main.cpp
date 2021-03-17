@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 
+#include "LiskovSubstitutionPrinciple.hpp"
 #include "OpenClosedPrinciple.hpp"
 #include "SingleResponsePrinciple.hpp"
 
@@ -64,8 +65,32 @@ void testOpenClosePrin() {
   }
 }
 
+/* ============================================================================================ */
+
+/* =================== 3. Liscov Substitution Principle ==================================== */
+template <class T>
+void process(Rectangle<T>& r) {
+  T w = r.getWidth();
+  r.setHeight(10);
+
+  cout << "Expected Area : " << w * 10 << "\t Got : " << r.area() << endl;
+}
+
+void testLiscovPrinciple() {
+  Rectangle<int> rect(10, 20);
+  process(rect);
+
+  Square<int> sqr(5);
+  /* This is where it breaks the law, as the process API will fail (give unexpected output)
+    Liscov Principle States that, for any operation e.g calling an API which take Basetype, substituting a derived type should not change/break the behaviour of the API */
+  process(sqr);
+}
+
+/* ============================================================================================ */
+
 int main() {
   /* 1. Single Responsibility Principle */
   testSingleRespPrin();
   testOpenClosePrin();
+  testLiscovPrinciple();
 }
