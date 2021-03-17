@@ -2,8 +2,8 @@
 #include <iostream>
 #include <string>
 
-#include "OpenClosedPrinciple.h"
-#include "SingleResponsePrinciple.h"
+#include "OpenClosedPrinciple.hpp"
+#include "SingleResponsePrinciple.hpp"
 
 using namespace std;
 
