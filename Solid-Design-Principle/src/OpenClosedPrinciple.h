@@ -72,17 +72,6 @@ class Specification {
   CombinationalSpecification<T> operator&&(Specification<T>&& other) { return CombinationalSpecification<T>(*this, other); }
 };
 
-template <class T>
-class CombinationalSpecification : public Specification<T> {
-  Specification<T>& _first;
-  Specification<T>& _second;
-
- public:
-  CombinationalSpecification(Specification<T>& first, Specification<T>& second) : _first(first), _second(second) {}
-
-  bool isSatisfied(T* item) { return _first.isSatisfied(item) && _second.isSatisfied(item); }
-};
-
 /* generic filter */
 template <class T>
 class Filter {
@@ -121,4 +110,15 @@ class SizeSpecification : public Specification<Product> {
   SizeSpecification() = delete;
   explicit SizeSpecification(const Size& size) : _size(size) {}
   bool isSatisfied(Product* item) override { return item->_size == _size; };
+};
+
+template <class T>
+class CombinationalSpecification : public Specification<T> {
+  Specification<T>& _first;
+  Specification<T>& _second;
+
+ public:
+  CombinationalSpecification(Specification<T>& first, Specification<T>& second) : _first(first), _second(second) {}
+
+  bool isSatisfied(T* item) { return _first.isSatisfied(item) && _second.isSatisfied(item); }
 };
