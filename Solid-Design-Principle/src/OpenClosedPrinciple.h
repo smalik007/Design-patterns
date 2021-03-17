@@ -59,12 +59,28 @@ class ProductFilter {
 /* Now using Concept of Open-Closed Principle, lets design a Better Filter  */
 
 /* we need to first define interfaces in terms of abstract classes*/
+template <class T>
+class CombinationalSpecification; /* Forward declaration */
 
 template <class T>
 class Specification {
  public:
   /* will check if a item satisfy particular specification */
   virtual bool isSatisfied(T* item) = 0;
+
+  /* Overloaded && operator  */
+  CombinationalSpecification<T> operator&&(Specification<T>&& other) { return CombinationalSpecification<T>(*this, other); }
+};
+
+template <class T>
+class CombinationalSpecification : public Specification<T> {
+  Specification<T>& _first;
+  Specification<T>& _second;
+
+ public:
+  CombinationalSpecification(Specification<T>& first, Specification<T>& second) : _first(first), _second(second) {}
+
+  bool isSatisfied(T* item) { return _first.isSatisfied(item) && _second.isSatisfied(item); }
 };
 
 /* generic filter */

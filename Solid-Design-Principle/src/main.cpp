@@ -57,6 +57,11 @@ void testOpenClosePrin() {
   for (auto& i : bf.filter(items, largeItems)) {
     cout << i->_name << " is large \n";
   }
+
+  CombinationalSpecification<Product> greenAndLarge(green, largeItems);
+  for (auto& i : bf.filter(items, greenAndLarge)) {
+    cout << i->_name << " is green and large \n";
+  }
 }
 
 int main() {
