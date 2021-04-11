@@ -17,7 +17,7 @@ endif ()
 add_definitions("-O3 -Wall -g -lstdc++ -Wl,-rpath -fpermissive -Wno-unused-variable -Wno-unused-function -Wno-unused-but-set-variable -std=c++17")
 
 # make a list of all source files for ButkerIPUServer
-file(GLOB SOURCES "src/*.h" "src/*.cpp")
+file(GLOB SOURCES "src/*.hpp" "src/*.cpp")
 
 # x86_64 settings
 add_executable(RunProgram ${SOURCES})

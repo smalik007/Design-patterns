@@ -3,6 +3,11 @@
 
 #include "BuilderHTML.hpp"
 #include "BuilderPizza.hpp"
+#include "CodeBuilder.hpp"
+#include "Person.hpp"
+#include "PersonAddressBuilder.hpp"
+#include "PersonBuilder.hpp"
+#include "PersonJobBuilder.hpp"
 
 using namespace std;
 
@@ -38,7 +43,19 @@ void testBuilderHTML() {
                       html::TableRow{html::TableData("John"), html::TableData("25"), html::TableData("M")}, html::TableRow{html::TableData("Aysha"), html::TableData("21"), html::TableData("F")}};
 }
 
+void testPersonBuilder() {
+  Person john = Person::create().lives().at("123 Baker Street").with_postcode("124566").in("London").works().at("ABC").as_a("Software Engineer").earning(10e3);
+  cout << john << endl;
+}
+
+void testCodeBuilder() {
+  auto cb = CodeBuilder{"Rectangle"}.add_field("length", "int").add_field("width", "int");
+  cout << cb;
+}
+
 int main() {
   //   testBuilder();
-  testBuilderHTML();
+  //   testBuilderHTML();
+  testPersonBuilder();
+  testCodeBuilder();
 }
