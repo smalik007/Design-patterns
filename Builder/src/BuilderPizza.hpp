@@ -25,6 +25,7 @@ using namespace std;
 /* Let’s oversimplify Builder pattern by bluntly saying:
    The Builder pattern’s main intent is to have the minimum number of overloading constructors to support the constuction of several representations of an object. */
 
+namespace pizza {
 class Pizza {
   string dough_;
   vector<string> sauce_;
@@ -130,3 +131,4 @@ class CookDirector {
  private:
   PizzaBuilder* pizzaBuilder_;
 };
+}
