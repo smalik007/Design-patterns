@@ -12,6 +12,8 @@
 #include <string>
 #include <vector>
 
+#define abstract
+
 using namespace std;
 
 /* Specification */
@@ -74,10 +76,10 @@ class Specification {
 
 /* generic filter */
 template <class T>
-class Filter {
+abstract class Filter {
  public:
   /* filter method takes the list(vector) of T items and filter it with corresponding specs, return the list of filtered items */
-  virtual vector<T*> filter(vector<T*> items, Specification<T>& specs) = 0;
+  virtual vector<T*> filter(const vector<T*> items, Specification<T>& specs) = 0;
 };
 
 /* Now we will inherit these Abstacted classes and implement the overrided virtual methods */
