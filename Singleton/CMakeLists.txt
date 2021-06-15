@@ -13,6 +13,13 @@ else ()
   set (CMAKE_CXX_STANDARD 17)
 endif ()
 
+# tells CMake to enable test
+enable_testing()
+
+set(GoogleTestLocation /home/suhail/Documents/Codes/googletest)
+
+add_subdirectory(${GoogleTestLocation} build)
+
 # add CFLAGS
 add_definitions("-O3 -Wall -g -lstdc++ -Wl,-rpath -fpermissive -Wno-unused-variable -Wno-unused-function -Wno-unused-but-set-variable -std=c++17")
 
@@ -24,4 +31,10 @@ add_executable(RunProgram ${SOURCES})
 target_link_libraries(RunProgram 
   boost_filesystem
   boost_system
+  gtest_main
+)
+
+add_test(
+  NAME RunProgram
+  COMMAND RunProgram
 )
