@@ -10,7 +10,9 @@
 
 #include <iostream>
 
+#include "SingletonDIInterface.hpp"
 #include "SingletonDatabase.hpp"
+#include "boost_di.hpp"
 
 using namespace std;
 
@@ -46,12 +48,31 @@ TEST(ConfRecordFinderTest2, ConfTotalPopTest2) {
   ASSERT_EQ(exp, res) << " Expected : " << exp << "got : " << res;
 }
 
+/* We will use boost's Dependency injection feature to create singleton instance of the class Foo. */
+void testBoostDIForSingleton() {
+  //  The Singleton instance of the class will have a lifetime same as of injector
+  auto injector = boost::di::make_injector(boost::di::bind<IFoo>().to<Foo>().in(boost::di::singleton));
+
+  /* Although we are creating two instance of Bar, but both of them will return the same ptr of Foo */
+  auto bar1 = injector.create<std::shared_ptr<Bar>>();
+  auto bar2 = injector.create<std::shared_ptr<Bar>>();
+
+  /* Hence output of both the prints will be same */
+  cout << bar1->foo->names() << endl;
+  cout << bar2->foo->names() << endl;
+
+  /* Infact both pointer are pointing the same instance (singleInstance) */
+  cout << boolalpha << (bar1->foo.get() == bar2->foo.get()) << endl;
+}
+
 int main(int agc, char* agv[]) {
   /* Main */
 
   testing::InitGoogleTest(&agc, agv);
 
   testSingletonDatabase();
+
+  testBoostDIForSingleton();
 
   return RUN_ALL_TESTS();
 }
