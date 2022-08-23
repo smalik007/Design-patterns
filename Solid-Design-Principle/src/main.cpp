@@ -12,7 +12,7 @@ using namespace std;
 
 /* =================== 1. Single Responsibility Principle ==================================== */
 
-void testSingleRespPrin() {
+void testSingleRespPrint() {
   Journal journal("My Diary");
   journal.addEntries("It's March 17 - 2021, Wednesday");
   journal.addEntries("It's nice weather today");
@@ -25,7 +25,7 @@ void testSingleRespPrin() {
 /* ============================================================================================ */
 
 /* =================== 2. Open Closed Principle ==================================== */
-void testOpenClosePrin() {
+void testOpenClosePrint() {
   Product apple{"Apple", Color::green, Size::small};
   Product tree{"Tree", Color::green, Size::large};
   Product house{"House", Color::blue, Size::large};
@@ -92,7 +92,7 @@ void testLiscovPrinciple() {
 
 int main() {
   /* 1. Single Responsibility Principle */
-  testSingleRespPrin();
-  testOpenClosePrin();
+  testSingleRespPrint();
+  testOpenClosePrint();
   testLiscovPrinciple();
 }
