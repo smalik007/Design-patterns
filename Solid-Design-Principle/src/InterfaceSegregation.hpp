@@ -35,7 +35,7 @@ struct Document;
 //     //   Do print operation
 //   }
 //   void fax(Document& doc) override {
-//      //   Have to leave blank
+//      //   Have to leave blank or throw Not::Implemented exception
 //   }
 //   void scan(Document& doc) override {
 //     //   Do scan operation
@@ -44,50 +44,72 @@ struct Document;
 
 // struct Scanner: IMachine {
 //   void print(Document& doc) override {
-//     //   Have to leave blank
+//     //   Have to leave blank or throw Not::Implemented exception
 //   }
 //   void fax(Document& doc) override {
-//      //   Have to leave blank
+//      //   Have to leave blank or throw Not::Implemented exception
 //   }
 //   void scan(Document& doc) override {
 //     //   Do scan operation
 //   }
 // };
 
-// 1. Recompile
+// 1. Recompile (time)
 // 2. Client does not need this
 // 3. Forcing implementors to implement too much
 
 /* Interface Segregation Principle States, we can individully define these methods as individual machine,
     and a machine which can perform multiple operation can use of multiple inheritance to use those functionality */
 
-struct IPrinter {
-  virtual void print(Document& doc) = 0;
+struct IPrinter
+{
+  virtual void print(Document &doc) = 0;
 };
 
-struct IScanner {
-  virtual void scan(Document& doc) = 0;
+struct IScanner
+{
+  virtual void scan(Document &doc) = 0;
 };
 
-struct Printer : IPrinter {
-  void print(Document& doc) override;
+struct IFax
+{
+  virtual void fax(Document &doc) = 0;
 };
 
-struct Scanner : IScanner {
-  void scan(Document& doc) override;
+struct Printer : IPrinter, IScanner
+{
+  void print(Document &doc) override;
+  void scan(Document &doc) override;
+};
+
+struct Scanner : IScanner
+{
+  void scan(Document &doc) override;
+};
+
+struct Fax : IFax
+{
+  void fax(Document &doc) override;
 };
 
 /* You can even just define a IMachine with it's inheritance type and leave it blank here making it abstact  */
-struct IMachine : IPrinter, IScanner {};
+struct IMachine : IPrinter, IScanner, IFax
+{
+};
 
-struct Machine : IMachine {
-  IPrinter& printer;
-  IScanner& scanner;
+struct Machine : IMachine
+{
+  IPrinter &printer;
+  IScanner &scanner;
+  IFax &faxd;
 
-  Machine(IPrinter& printer, IScanner& scanner) : printer{printer}, scanner{scanner} {}
+  Machine(IPrinter &printer, IScanner &scanner, IFax &fax) : printer(printer), scanner(scanner), faxd(fax)
+  {
+  }
 
-  void print(Document& doc) override { printer.print(doc); }
-  void scan(Document& doc) override;
+  void print(Document &doc) override { printer.print(doc); }
+  void scan(Document &doc) override;
+  void fax(Document &doc) override;
 };
 
 // IPrinter --> Printer

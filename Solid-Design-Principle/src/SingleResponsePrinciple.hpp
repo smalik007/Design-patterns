@@ -15,6 +15,7 @@
 using namespace std;
 
 /* =================== 1. Single Responsibility Principle ======================= */
+/* Separation of concerns */
 
 class Journal {
   string _title;

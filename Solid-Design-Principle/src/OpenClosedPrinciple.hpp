@@ -5,6 +5,8 @@
  * @date    2021-03-17 14:59:10
  *
  */
+/* =================== 1. Single Responsibility Principle ======================= */
+/* A class should be open for extension but closed for modification */
 
 #pragma once
 
@@ -36,7 +38,7 @@ class ProductFilter {
     return result;
   }
 
-  /* Problem with this filter method is it is not open for extension, So if let say now we want to filder by Size we need to add one more member here */
+  /* Problem with this filter method is it is not open for extension, So if let say now we want to filter by Size we need to add one more member here */
 
   /* This is wrong way of design */
   vector<Product*> bySize(vector<Product*> items, Size size) {
@@ -65,7 +67,7 @@ template <class T>
 class CombinationalSpecification; /* Forward declaration */
 
 template <class T>
-class Specification {
+class Specification { 
  public:
   /* will check if a item satisfy particular specification */
   virtual bool isSatisfied(T* item) = 0;
