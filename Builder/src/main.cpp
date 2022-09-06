@@ -37,12 +37,15 @@ void motivation()
 void testBuilder1()
 {
   HTMLBuilder builder{"ul"};
-  builder.add_children("li", "hello");
-  builder.add_children("li", "world");
+  // builder.add_children("li", "hello");
+  // builder.add_children("li", "world");
+
+  builder.add_children("li", "hello").add_children("li", "world");
+
   cout << builder.str();
 }
 
-void testBuilder()
+void testPizzaBuilder()
 {
   pizza::CookDirector cook;
   pizza::MargheritaConcreteBuilder margheritaPizza;
@@ -91,9 +94,9 @@ void testCodeBuilder()
 int main()
 {
   // motivation();
-  testBuilder1();
+  // testBuilder1();
   // testBuilderHTML();
-  // testBuilder();
+  testPizzaBuilder();
 
   // testPersonBuilder();
   // testCodeBuilder();

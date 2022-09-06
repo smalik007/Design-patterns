@@ -11,14 +11,20 @@
 #include "HotDrink.hpp"
 using namespace std;
 
-struct HotDrinkFactory {
+class HotDrinkFactory
+{
+public:
   virtual unique_ptr<HotDrink> make() const = 0;
 };
 
-struct TeaFactory : HotDrinkFactory {
+class TeaFactory : public HotDrinkFactory
+{
+public:
   unique_ptr<HotDrink> make() const override { return make_unique<Tea>(); }
 };
 
-struct CoffeeFactory : HotDrinkFactory {
+class CoffeeFactory : public HotDrinkFactory
+{
+public:
   unique_ptr<HotDrink> make() const override { return make_unique<Cofee>(); }
 };

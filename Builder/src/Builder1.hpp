@@ -48,10 +48,17 @@ public:
         root.name_ = root_name;
     }
 
-    void add_children(string child_name, string child_text)
+    // void add_children(string child_name, string child_text)
+    // {
+    //     HTMLElemnt e{child_name, child_text};
+    //     root.elements_.emplace_back(e);
+    // }
+
+    HTMLBuilder &add_children(string child_name, string child_text)
     {
         HTMLElemnt e{child_name, child_text};
         root.elements_.emplace_back(e);
+        return *this;
     }
 
     string str() const

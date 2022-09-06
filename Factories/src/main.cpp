@@ -6,7 +6,7 @@
  *
  */
 
-/* Factories : A component solely for wholesale (not piecewise like in Builder pattern) creation of object. */
+/* Factories : A component solely for wholesale (not piecewise like in Builder pattern) creation of object. can be outsourced to*/
 
 #include <iostream>
 
@@ -15,7 +15,8 @@
 
 using namespace std;
 
-void testFactoryPoint() {
+void testFactoryPoint()
+{
   //   auto p = Point::newPolar(5, M_PI_4);
   //   cout << p << endl;
   //   auto p2 = Point::newCartesian(2, 3);
@@ -27,13 +28,15 @@ void testFactoryPoint() {
   cout << p2 << endl;
 }
 
-void testAbstractFactory() {
+void testAbstractFactory()
+{
   DrinkFactory df;
   auto c = df.make_drink("coffee", 50);
   auto t = df.make_drink("tea", 200);
 }
 
-int main() {
+int main()
+{
   testFactoryPoint();
   testAbstractFactory();
   return 0;
