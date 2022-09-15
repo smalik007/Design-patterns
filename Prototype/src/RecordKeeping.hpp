@@ -6,6 +6,9 @@
 using namespace std;
 
 /* Motivation behind Prototype patterns */
+/* To take existing design as prototype and either shallow copy it or deep copy it to make new design wih
+  additional changes etc.
+ */
 
 struct Address {
   string street, city;
@@ -37,6 +40,8 @@ class Employee {
   string name_;
   Address* add_;
 
+  Employee() = default;
+
   Employee(const string& name, Address* add) : name_(name), add_(add) {}
 
   /* You need to define a copy constructor, that will create a deep copy */
@@ -46,10 +51,10 @@ class Employee {
   Employee(const Employee& other) : name_(other.name_), add_(new Address{*other.add_}) { cout << "Calling Employee copy constructor \n"; }
 
   /* Similarly you can override the = operator */
-  Employee operator=(const Employee& other) {
-    cout << "Calling Employee = operator \n";
-    Employee emp(other.name_, new Address{*other.add_});
-    return emp;
+  void operator=(const Employee& other) {
+    cout << "Calling = operator \n";
+    add_ = new Address{*other.add_};
+
   }
 
   friend ostream& operator<<(ostream& os, const Employee& emp) {

@@ -37,11 +37,17 @@ void testPrototypePattern() {
   Aisha.name_ = "Aisha";
   Aisha.add_->appartment_no = 1208;
 
-  Employee Rohan = Amir;
-  Rohan.name_ = "Rohan"; /* This again calls copy constructor */
+  Employee Rohan = Amir; /* This again calls copy constructor. */
+  Rohan.name_ = "Rohan"; 
   Rohan.add_->appartment_no = 1210;
+  
+  /* Remeber the assignment operator is called when already constructed objects are equatest to each other. */ 
+  Employee Faisal;
+  Faisal = Amir; // This time the assingment operator will be called
+  Faisal.name_ = "Faisal";
+  Faisal.add_->appartment_no = 1215;
 
-  cout << Amir << endl << Aisha << endl << Rohan << endl;
+  cout << Amir << endl << Aisha << endl << Rohan  << endl << Faisal << endl;
 }
 
 void testPrototypeFactory() {

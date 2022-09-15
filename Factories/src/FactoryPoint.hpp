@@ -79,6 +79,8 @@ public:
 
   /* Adding Separate of Concern with Factory class */
   // Inner class can access the private member (e.g here Private Point constructor)
+  // you can also make this private and give a singleton object exposed as public member to outside world
+  // private:
   class PointFactory
   {
   public:
@@ -94,4 +96,7 @@ public:
       return {(r * cos(theta)), (r * sin(theta))};
     }
   };
+
+  // public: 
+  //   static PointFactory factory; // singleton object of class PointFactory when you make it private to access it
 };
